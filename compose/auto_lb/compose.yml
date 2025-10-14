@@ -33,5 +33,5 @@ services:
     expose:
       - "80"
     environment:
-      - VIRTUAL_HOST=aws.google.com,172.31.86.218,ec2-54-236-8-204.compute-1.amazonaws.com
+      - VIRTUAL_HOST=aws.google.com
       - VIRTUAL_PORT=80
