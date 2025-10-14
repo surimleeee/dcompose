@@ -12,7 +12,9 @@ services:
 
     ports:
       - "9889:80"
-    # TODO : volumes 필요한지 
+
+    # TODO : volumes 필요한지 고민해보기
+
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
