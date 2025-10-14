@@ -2,9 +2,17 @@ version: '3.8'
 name: awsgoo
 services:
   nginx-proxy:
+    # TODO START
+    # 우리는 default.conf가 들어있는 nginx를 사용
+    # images가 아니라 아래 blog 블럭과 같은 build를 사용
+    # default.conf의 upstream에 있는 서비스 이름을 아래 생성되는 블로그 패턴과 맞추기
+
     image: nginxproxy/nginx-proxy # https://github.com/nginx-proxy/nginx-proxy
+    # TODO END
+
     ports:
-      - "9889:80"
+      - "9889:80"고민
+    # TODO : volumes 필요한지 
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
