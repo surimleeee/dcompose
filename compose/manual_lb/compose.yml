@@ -7,11 +7,11 @@ services:
     # images가 아니라 아래 blog 블럭과 같은 build를 사용
     # default.conf의 upstream에 있는 서비스 이름을 아래 생성되는 블로그 패턴과 맞추기
 
-    image: nginxproxy/nginx-proxy # https://github.com/nginx-proxy/nginx-proxy
+    build: ../../docker_file/nginx
     # TODO END
 
     ports:
-      - "9889:80"고민
+      - "9889:80"
     # TODO : volumes 필요한지 
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
@@ -30,7 +30,7 @@ services:
     build: ../../docker_file/httpd
     deploy:
       mode: replicated
-      replicas: 1 # https://docs.docker.com/compose/compose-file/deploy/#replicas
+      replicas: 2 # https://docs.docker.com/compose/compose-file/deploy/#replicas
       resources: # https://docs.docker.com/compose/compose-file/compose-file-v3/#resources
         limits:
           cpus: '0.05'
