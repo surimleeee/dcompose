@@ -1,0 +1,47 @@
+version: '3.8'
+name: awsgoo
+services:
+  nginx-proxy:
+    # TODO START
+    # 우리는 default.conf가 들어있는 nginx를 사용
+    # images가 아니라 아래 blog 블럭과 같은 build를 사용
+    # default.conf의 upstream에 있는 서비스 이름을 아래 생성되는 블로그 패턴과 맞추기
+
+    build: ../../docker_file/nginx
+    # TODO END
+
+    ports:
+      - "9889:80"
+
+    # TODO : volumes 필요한지 고민해보기
+
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    depends_on:
+      - blog
+    deploy:
+      resources:
+        limits:
+          cpus: '0.20'
+          memory: 50M
+        reservations:
+          cpus: '0.05'
+          memory: 20M
+
+  blog:
+    build: ../../docker_file/httpd
+    deploy:
+      mode: replicated
+      replicas: 2 # https://docs.docker.com/compose/compose-file/deploy/#replicas
+      resources: # https://docs.docker.com/compose/compose-file/compose-file-v3/#resources
+        limits:
+          cpus: '0.05'
+          memory: 50M
+        reservations:
+          cpus: '0.01'
+          memory: 20M
+    expose:
+      - "80"
+    environment:
+      - VIRTUAL_HOST=aws.google.com
+      - VIRTUAL_PORT=80
