@@ -7,7 +7,7 @@ services:
     # images가 아니라 아래 blog 블럭과 같은 build를 사용
     # default.conf의 upstream에 있는 서비스 이름을 아래 생성되는 블로그 패턴과 맞추기
 
-    build: ../../docker_file/nginx
+    build: ../../docker_file/nginx_compose
     # TODO END
 
     ports:
@@ -43,5 +43,5 @@ services:
     expose:
       - "80"
     environment:
-      - VIRTUAL_HOST=aws.google.com
+      - VIRTUAL_HOST=aws.google.com,localhost
       - VIRTUAL_PORT=80
